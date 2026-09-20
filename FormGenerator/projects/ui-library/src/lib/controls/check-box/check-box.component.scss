@@ -1,0 +1,10 @@
+.ui-check {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  cursor: pointer;
+
+  &_label {
+    user-select: none;
+  }
+}

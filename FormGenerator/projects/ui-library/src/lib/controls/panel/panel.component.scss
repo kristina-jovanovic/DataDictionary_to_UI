@@ -1,0 +1,117 @@
+.ui-panel {
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  padding: 1rem 1rem;
+
+  &.is-root {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+
+    @media (max-width: 640px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  &_heading {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: .9rem;
+  }
+
+  &_title {
+    font-weight: 600;
+  }
+
+  &_body {
+    margin-bottom: 0.2rem;
+
+    &.flow {
+      display: flex;
+
+      &.is-main-stretch > * {
+        flex: 1 1 0;
+      }
+    }
+
+    &.grid {
+      display: grid;
+
+      &.lines > * {
+        border: 1px solid #e2e2e2;
+        padding: .35rem;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+.ui-tabs {
+  width: 100%;
+
+  &_bar {
+    display: flex;
+    gap: .25rem;
+    border-bottom: 1px solid #d0d0d0;
+    margin-bottom: .75rem;
+  }
+
+  &_tab {
+    border: 1px solid #d0d0d0;
+    border-bottom: none;
+    background: #f3f3f3;
+    padding: .35rem .8rem;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    font-size: .95rem;
+
+    &.is-active {
+      background: #fff;
+      font-weight: 600;
+      margin-bottom: -1px;
+    }
+  }
+}
+
+.ui-panel--edit {
+  outline: 1px dashed #4a90d9;
+  outline-offset: 2px;
+  cursor: context-menu;
+}
+
+.ui-panel_backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+}
+
+.ui-panel_menu {
+  position: fixed;
+  z-index: 1001;
+  min-width: 230px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .18);
+  padding: .5rem .6rem;
+
+  &-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: .5rem;
+
+    button {
+      border: none;
+      background: transparent;
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+  }
+}

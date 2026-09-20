@@ -1,0 +1,16 @@
+<label class="ui-field">
+  <span class="ui-field_label" *ngIf="node.label">
+    {{ node.label }}<em *ngIf="node.isRequired"> *</em>
+  </span>
+  <span class="ui-slider" *ngIf="fc as c">
+    <input
+      class="ui-slider_input"
+      type="range"
+      [formControl]="c"
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [attr.disabled]="node.isReadOnly ? '' : null" />
+    <output class="ui-slider_value">{{ c.value }}</output>
+  </span>
+</label>

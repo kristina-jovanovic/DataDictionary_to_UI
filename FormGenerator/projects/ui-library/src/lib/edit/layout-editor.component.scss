@@ -1,0 +1,20 @@
+.ui-led {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  font-size: 13px;
+
+  &_row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+
+    select, input[type="number"] {
+      padding: .2rem .35rem;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+    }
+    input[type="number"] { width: 5rem; }
+  }
+}

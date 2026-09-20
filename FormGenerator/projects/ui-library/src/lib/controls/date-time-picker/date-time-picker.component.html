@@ -1,0 +1,51 @@
+<label class="ui-field">
+  <span class="ui-field_label" *ngIf="node.label">
+    {{ node.label }}<em *ngIf="node.isRequired"> *</em>
+  </span>
+
+  <ng-container *ngIf="fc as c">
+    <input
+      *ngIf="!useFormat"
+      class="ui-field_input"
+      [type]="nativeType"
+      [formControl]="c"
+      [attr.min]="node.min"
+      [attr.max]="node.max"
+      [readOnly]="!!node.isReadOnly" />
+
+    <input
+      *ngIf="useFormat && isYearOnly"
+      type="number"
+      class="ui-field_input"
+      [formControl]="c"
+      [readOnly]="!!node.isReadOnly"
+      [attr.min]="node.min"
+      [attr.max]="node.max"
+      [attr.placeholder]="node.format" />
+
+    <div class="ui-datepick" *ngIf="useFormat && !isYearOnly">
+      <input
+        type="text"
+        class="ui-field_input"
+        readonly
+        [value]="displayValue"
+        [attr.placeholder]="node.format"
+        (click)="openPicker(picker)" />
+      <input
+        #picker
+        class="ui-datepick_native"
+        [type]="pickerType"
+        [value]="isoValue"
+        [attr.min]="node.min"
+        [attr.max]="node.max"
+        [disabled]="!!node.isReadOnly"
+        (change)="onPick($event)" />
+      <button
+        *ngIf="!inCollection"
+        type="button"
+        class="ui-datepick_btn"
+        [disabled]="!!node.isReadOnly"
+        (click)="openPicker(picker)">📅</button>
+    </div>
+  </ng-container>
+</label>

@@ -1,0 +1,8 @@
+<label class="ui-check">
+  <input
+    type="checkbox"
+    class="ui-check_input"
+    [checked]="checked"
+    (change)="toggle($event)" />
+  <span class="ui-check_label" *ngIf="node.label">{{ node.label }}</span>
+</label>

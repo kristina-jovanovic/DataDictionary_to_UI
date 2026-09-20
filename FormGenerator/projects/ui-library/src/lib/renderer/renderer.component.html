@@ -1,0 +1,9 @@
+<ng-container
+  *ngIf="component as cmp; else unknown"
+  [ngComponentOutlet]="cmp"
+  [ngComponentOutletInputs]="inputs">
+</ng-container>
+
+<ng-template #unknown>
+  <div class="ui-renderer_unknown">Непозната контрола: {{ node.type }}</div>
+</ng-template>

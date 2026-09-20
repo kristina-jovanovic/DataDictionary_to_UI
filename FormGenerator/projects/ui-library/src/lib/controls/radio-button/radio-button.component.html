@@ -1,0 +1,9 @@
+<label class="ui-radio">
+  <input
+    type="radio"
+    class="ui-radio_input"
+    [name]="node.groupName"
+    [checked]="checked"
+    (change)="select()" />
+  <span class="ui-radio_label" *ngIf="node.label">{{ node.label }}</span>
+</label>

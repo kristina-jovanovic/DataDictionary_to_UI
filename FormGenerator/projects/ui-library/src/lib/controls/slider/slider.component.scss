@@ -1,0 +1,16 @@
+.ui-slider {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+
+  &_input {
+    flex: 1;
+  }
+
+  &_value {
+    min-width: 42px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: #333;
+  }
+}

@@ -1,0 +1,21 @@
+.ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+
+  &_label em {
+    color: #c0392b;
+    font-style: normal;
+  }
+
+  &_input {
+    padding: .35rem .5rem;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background: #fff;
+  }
+}
+
+.ui-field_input.ng-touched.ng-invalid {
+  border-color: #c0392b;
+}

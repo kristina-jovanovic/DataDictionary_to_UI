@@ -1,0 +1,63 @@
+.ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+
+  &_label em {
+    color: #c0392b;
+    font-style: normal;
+  }
+
+  &_input {
+    padding: .35rem .5rem;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+
+    &[readonly] {
+      background: #f3f3f3;
+    }
+  }
+
+  &_box {
+    position: relative;
+    display: block;
+
+    .ui-field_input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    &.has-suffix .ui-field_input {
+      padding-right: 2.8rem;
+    }
+    &.has-prefix .ui-field_input {
+      padding-left: 2rem;
+    }
+
+    &.has-suffix .ui-field_input[type='number'] {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+    &.has-suffix .ui-field_input[type='number']::-webkit-outer-spin-button,
+    &.has-suffix .ui-field_input[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  &_prefix,
+  &_suffix {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+    font-size: .85rem;
+    pointer-events: none;
+  }
+  &_prefix { left: .55rem; }
+  &_suffix { right: .6rem; }
+}
+
+.ui-field_input.ng-touched.ng-invalid {
+  border-color: #c0392b;
+}

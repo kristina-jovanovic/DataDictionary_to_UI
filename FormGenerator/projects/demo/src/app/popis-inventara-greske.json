@@ -1,0 +1,56 @@
+{
+  "id": 1,
+  "name": "ПописИнвентараГрешкe",
+  "type": "Panel",
+  "title": "Попис инвентара (са грешкама)",
+  "layout": { "type": "Flow" },
+  "controls": [
+    {
+      "id": 2,
+      "name": "Организација",
+      "type": "TextBox",
+      "label": "Организација"
+    },
+    {
+      "id": 3,
+      "name": "Адреса",
+      "type": "TextBox",
+      "label": "Адреса",
+      "dataType": "String",
+      "isRequired": "da"
+    },
+    {
+      "id": 4,
+      "name": "ЛистаИнвентара",
+      "type": "Panel",
+      "title": "Листа инвентара",
+      "layout": { "type": "Flow" },
+      "controls": [
+        {
+          "id": 5,
+          "name": "СтавкаЛисте",
+          "type": "Collection"
+        },
+        {
+          "id": 6,
+          "name": "Клизач",
+          "type": "Slajder",
+          "dataType": "Real"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Празан",
+      "type": "Panel",
+      "title": "Празан панел",
+      "layout": { "type": "Flow" },
+      "controls": []
+    },
+    {
+      "id": "8",
+      "name": "Наслов",
+      "type": "Label"
+    }
+  ]
+}

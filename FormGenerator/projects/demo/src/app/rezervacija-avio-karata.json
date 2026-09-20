@@ -1,0 +1,332 @@
+{
+  "type": "Panel",
+  "id": 1,
+  "name": "РезервацијаАвиоКарата",
+  "title": "Резервација авио карата",
+  "layout": {
+    "type": "Flow"
+  },
+  "controls": [
+    {
+      "type": "TextBox",
+      "id": 2,
+      "name": "БројРезервације",
+      "pattern": "^[A-Z]{2}-\\d{4}-\\d{4}$",
+      "dataType": "String",
+      "label": "Број резервације",
+      "isRequired": true
+    },
+    {
+      "type": "DateTimePicker",
+      "id": 3,
+      "name": "ДатумРезервације",
+      "format": "dd.MM.yyyy.",
+      "dataType": "Date",
+      "label": "Датум резервације",
+      "isRequired": true
+    },
+    {
+      "type": "ComboBox",
+      "id": 4,
+      "name": "СтатусРезервације",
+      "isEditable": false,
+      "placeholder": "",
+      "selectionModel": "Single",
+      "items": [
+        {
+          "id": 5,
+          "label": "потврђена",
+          "value": "потврђена"
+        },
+        {
+          "id": 6,
+          "label": "непотврђена",
+          "value": "непотврђена"
+        },
+        {
+          "id": 7,
+          "label": "отказана",
+          "value": "отказана"
+        }
+      ],
+      "dataType": "String",
+      "label": "Статус резервације",
+      "isRequired": true
+    },
+    {
+      "type": "Panel",
+      "id": 8,
+      "name": "ПодациОПутнику",
+      "title": "Подаци о путнику",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "TextBox",
+          "id": 9,
+          "name": "ИмеИПрезиме",
+          "pattern": "^([А-Ш][а-ш]+\\s*)+$",
+          "dataType": "String",
+          "label": "Име и презиме",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 10,
+          "name": "БројПасоша",
+          "pattern": "^[0-9]{7}$",
+          "dataType": "String",
+          "label": "Број пасоша",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 11,
+          "name": "Држављанство",
+          "dataType": "String",
+          "label": "Држављанство",
+          "isRequired": true
+        }
+      ]
+    },
+    {
+      "type": "Collection",
+      "id": 12,
+      "name": "СтавкаРезервације",
+      "template": {
+        "type": "Panel",
+        "id": 13,
+        "name": "СтавкаРезервације",
+        "title": "Ставка резервације",
+        "layout": {
+          "type": "Grid",
+          "showGridLines": true
+        },
+        "controls": [
+          {
+            "type": "TextBox",
+            "id": 14,
+            "name": "Лет",
+            "pattern": "^[A-Z0-9]{2}\\d{1,4}[A-Z]?$",
+            "dataType": "String",
+            "label": "Лет",
+            "isRequired": true
+          },
+          {
+            "type": "TextBox",
+            "id": 15,
+            "name": "Полазак",
+            "dataType": "String",
+            "label": "Полазак",
+            "isRequired": true
+          },
+          {
+            "type": "TextBox",
+            "id": 16,
+            "name": "Долазак",
+            "dataType": "String",
+            "label": "Долазак",
+            "isRequired": true
+          },
+          {
+            "type": "DateTimePicker",
+            "id": 17,
+            "name": "Датум",
+            "format": "dd.MM.yyyy.",
+            "dataType": "Date",
+            "label": "Датум",
+            "isRequired": true
+          },
+          {
+            "type": "DateTimePicker",
+            "id": 18,
+            "name": "Време",
+            "format": "HH:mm",
+            "dataType": "Date",
+            "label": "Време",
+            "isRequired": true
+          },
+          {
+            "type": "TextBox",
+            "id": 19,
+            "name": "Седиште",
+            "pattern": "^[1-9][0-9]*[ A-HJ-K]$",
+            "dataType": "String",
+            "label": "Седиште"
+          },
+          {
+            "type": "TextBox",
+            "id": 20,
+            "name": "ЦенаКарте",
+            "pattern": "{n} РСД",
+            "dataType": "Integer",
+            "label": "Цена карте",
+            "isRequired": true,
+            "restrictedValue": {
+              "rules": [
+                {
+                  "targetName": "СтавкаРезервације.ЦенаКарте",
+                  "operator": ">=",
+                  "value": 0
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Panel",
+      "id": 21,
+      "name": "ДодатнеУслуге",
+      "title": "Додатне услуге",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "CheckBox",
+          "id": 22,
+          "name": "Изабрано",
+          "groupName": "Додатне услуге",
+          "optionValue": "Изабрано",
+          "dataType": "Logical",
+          "label": "Изабрано",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 23,
+          "name": "Назив",
+          "dataType": "String",
+          "label": "Назив",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 24,
+          "name": "ЦенаУслуге",
+          "pattern": "{n} РСД",
+          "dataType": "Integer",
+          "label": "Цена услуге",
+          "isRequired": true,
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "ЦенаУслуге",
+                "operator": ">",
+                "value": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "Panel",
+      "id": 25,
+      "name": "Обрачун",
+      "title": "Обрачун",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "TextBox",
+          "id": 26,
+          "name": "ЦенаКарата",
+          "pattern": "{n} РСД",
+          "dataType": "Integer",
+          "label": "Цена карата",
+          "isRequired": true,
+          "isReadOnly": true,
+          "computedValue": {
+            "rules": [
+              {
+                "operator": "SUM",
+                "value": [
+                  {
+                    "targetName": "СтавкаРезервације.ЦенаКарте"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 27,
+          "name": "АеродромскеТаксе",
+          "pattern": "{n} РСД",
+          "dataType": "Integer",
+          "label": "Аеродромске таксе",
+          "isRequired": true,
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "АеродромскеТаксе",
+                "operator": ">=",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 28,
+          "name": "ЦенаДодатнихУслуга",
+          "pattern": "{n} РСД",
+          "dataType": "Integer",
+          "label": "Цена додатних услуга",
+          "isReadOnly": true,
+          "computedValue": {
+            "rules": [
+              {
+                "operator": "SUM",
+                "value": [
+                  {
+                    "targetName": "ДодатнеУслуге.ЦенаУслуге"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 29,
+          "name": "УкупанИзносЗаПлаћање",
+          "pattern": "{n} РСД",
+          "dataType": "Integer",
+          "label": "Укупан износ за плаћање",
+          "isRequired": true,
+          "isReadOnly": true,
+          "computedValue": {
+            "rules": [
+              {
+                "operator": "+",
+                "value": [
+                  {
+                    "operator": "+",
+                    "value": [
+                      {
+                        "targetName": "ЦенаКарата"
+                      },
+                      {
+                        "targetName": "АеродромскеТаксе"
+                      }
+                    ]
+                  },
+                  {
+                    "targetName": "ЦенаДодатнихУслуга"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

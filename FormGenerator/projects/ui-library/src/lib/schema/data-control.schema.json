@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/data-control.schema.json",
+  "type": "object",
+  "required": ["dataType"],
+  "properties": {
+    "label": { "type": "string" },
+    "dataType": { "type": "string" },
+    "defaultValue": {},
+    "isRequired": { "type": "boolean", "default": false },
+    "isReadOnly": { "type": "boolean", "default": false },
+    "restrictedValue": { "$ref": "expression.schema.json" },
+    "computedValue": { "$ref": "expression.schema.json" }
+  },
+  "allOf": [
+    { "if": { "properties": { "type": { "const": "TextBox" } } },
+      "then": { "$ref": "controls/text-box.schema.json" } },
+    { "if": { "properties": { "type": { "const": "DateTimePicker" } } },
+      "then": { "$ref": "controls/date-time-picker.schema.json" } },
+    { "if": { "properties": { "type": { "enum": ["RadioButton", "CheckBox"] } } },
+      "then": { "$ref": "controls/choice.schema.json" } },
+    { "if": { "properties": { "type": { "const": "ComboBox" } } },
+      "then": { "$ref": "controls/combo-box.schema.json" } },
+    { "if": { "properties": { "type": { "const": "FilePicker" } } },
+      "then": { "$ref": "controls/file-picker.schema.json" } },
+    { "if": { "properties": { "type": { "const": "Slider" } } },
+      "then": { "$ref": "controls/slider.schema.json" } }
+  ]
+}
