@@ -1,0 +1,211 @@
+DATA DICTIONARY
+id: 3
+name: "Резервација авио карата"
+author: "КЈ"
+version: "1"
+date of creation: 13.08.2026.
+{
+    SEMANTIC DOMAIN
+    id: 1
+    name: "ДСтатус"
+    base: String
+    values: ("потврђена" "непотврђена" "отказана")
+
+    STRUCTURES
+    id: 1
+    name: "Резервација авио карата"
+    type: dataStore
+    <
+        id: 2
+        name: "Број резервације"
+        &
+            domain: String
+            format: "^[A-Z]{2}-\d{4}-\d{4}$"
+            nullability: not null
+        &
+        
+        id: 3
+        name: "Датум резервације"
+        &
+            domain: Date
+            format: "dd.MM.yyyy."
+            nullability: not null
+        &
+
+        id: 5
+        name: "Статус резервације"
+        &
+            domain: "ДСтатус"
+            nullability: not null
+        &
+
+        id: 6
+        name: "Подаци о путнику"
+        #
+            type: dataStore
+            <
+                id: 7
+                name: "Име и презиме"
+                &
+                    domain: String
+		            format: "^([А-Ш][а-ш]+\s*)+$"
+                    nullability: not null
+                &
+
+                id: 8
+                name: "Број пасоша"
+                &
+                    domain: String
+		            format: "^[0-9]{7}$"
+                    nullability: not null
+                &
+
+                id: 9
+                name: "Држављанство"
+                &
+                    domain: String
+                    nullability: not null
+                &
+            >
+        #
+
+        id: 10
+        name: "Ставка резервације"
+        #
+            type: dataStore
+            {
+                id: 11
+                name: "Лет"
+                &
+                    domain: String
+		            format: "^[A-Z0-9]{2}\d{1,4}[A-Z]?$"
+                    nullability: not null
+                &
+
+                id: 12
+                name: "Полазак"
+                &
+                    domain: String
+                    nullability: not null
+                &
+
+                id: 13
+                name: "Долазак"
+                &
+                    domain: String
+                    nullability: not null
+                &
+
+                id: 14
+                name: "Датум"
+                &
+                    domain: Date
+                    format: "dd.MM.yyyy."
+                    nullability: not null
+                &
+
+                id: 15
+                name: "Време"
+                &
+                    domain: Date
+                    format: "HH:mm"
+                    nullability: not null
+                &
+
+                id: 16
+                name: "Седиште"
+                &
+                    domain: String
+                    format: "^[1-9][0-9]*[ A-HJ-K]$"
+                    nullability: null
+                &
+
+                id: 17
+                name: "Цена карте"
+                &
+                    domain: Integer
+                    format: "{n} РСД"
+                    nullability: not null
+                    constraint: >= 0
+                &
+            }
+        #
+
+        id: 18
+        name: "Додатне услуге"
+        # name: "Додатне услуге" #
+
+        id: 19
+        name: "Обрачун"
+        # name: "Обрачун" #
+    >
+
+    name: "Додатне услуге"
+    type: dataStore
+    {
+        id: 20
+        name: "Изабрано"
+        &
+            domain: Logical
+        &
+
+        id: 21
+        name: "Назив"
+        &
+            domain: String
+            nullability: not null
+        &
+
+        id: 22
+        name: "Цена услуге"
+        &
+            domain: Integer
+            format: "{n} РСД"
+            nullability: not null
+            constraint: > 0
+        &
+
+     }
+
+     id: 23
+     name: "Обрачун"
+     type: dataStore
+     <
+        id: 24
+        name: "Цена карата"
+        &
+            domain: Integer
+            format: "{n} РСД"
+            nullability: not null
+            constraint: =SUM("Цена карте")
+        &
+
+        id: 25
+        name: "Аеродромске таксе"
+        &
+            domain: Integer
+            format: "{n} РСД"
+            nullability: not null
+            constraint: >= 0
+        &
+
+        id: 26
+        name: "Цена додатних услуга"
+        &
+            domain: Integer
+            format: "{n} РСД"
+            nullability: null
+            constraint: =SUM("Цена услуге")
+        &
+
+        id: 27
+        name: "Укупан износ за плаћање"
+        &
+            domain: Integer
+            format: "{n} РСД"
+            nullability: not null
+            constraint: = "Цена карата" + "Аеродромске таксе" + "Цена додатних услуга"
+        &
+     >
+
+}
