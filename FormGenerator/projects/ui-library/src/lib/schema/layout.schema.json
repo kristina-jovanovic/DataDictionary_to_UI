@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/layout.schema.json",
+  "type": "object",
+  "properties": {
+    "type": { "enum": ["Flow", "Grid", "Anchor", "Explicit"], "default": "Flow" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "Flow" } }, "required": ["type"] },
+      "then": {
+        "properties": {
+          "orientation": { "enum": ["horizontal", "vertical"], "default": "vertical" },
+          "isWrapped": { "type": "boolean", "default": false },
+          "mainAxisAlignment": { "$ref": "#/$defs/alignment", "default": "Start" },
+          "crossAxisAlignment": { "$ref": "#/$defs/alignment", "default": "Stretch" },
+          "spacing": { "type": "number", "default": 8 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "Grid" } }, "required": ["type"] },
+      "then": {
+        "properties": {
+          "showGridLines": { "type": "boolean", "default": false },
+          "columns": { "type": "array", "items": { "$ref": "#/$defs/gridColumn" } },
+          "rows": { "type": "array", "items": { "$ref": "#/$defs/gridRow" } },
+          "spacing": { "type": "number", "default": 8 }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "Anchor" } }, "required": ["type"] },
+      "then": {
+        "properties": {
+          "isLastChildFill": { "type": "boolean", "default": false },
+          "spacing": { "type": "number", "default": 8 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "alignment": { "enum": ["Start", "Center", "End", "Stretch"] },
+    "gridColumn": {
+      "type": "object",
+      "properties": {
+        "width": { "type": ["string", "number"] },
+        "minWidth": { "type": "number" },
+        "maxWidth": { "type": "number" }
+      }
+    },
+    "gridRow": {
+      "type": "object",
+      "properties": {
+        "height": { "type": ["string", "number"] },
+        "minHeight": { "type": "number" },
+        "maxHeight": { "type": "number" }
+      }
+    }
+  }
+}

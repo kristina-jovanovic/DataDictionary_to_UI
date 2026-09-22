@@ -1,0 +1,9 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/controls/choice.schema.json",
+  "type": "object",
+  "properties": {
+    "groupName": { "type": "string" },
+    "optionValue": { "type": "string" }
+  }
+}

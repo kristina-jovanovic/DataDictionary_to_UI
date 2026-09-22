@@ -1,0 +1,273 @@
+{
+  "type": "Panel",
+  "id": 1,
+  "name": "ПописИнвентара",
+  "title": "Попис инвентара",
+  "layout": {
+    "type": "Flow"
+  },
+  "controls": [
+    {
+      "type": "TextBox",
+      "id": 2,
+      "name": "Организација",
+      "dataType": "String",
+      "label": "Организација",
+      "isRequired": true
+    },
+    {
+      "type": "TextBox",
+      "id": 3,
+      "name": "Адреса",
+      "dataType": "String",
+      "label": "Адреса",
+      "isRequired": true
+    },
+    {
+      "type": "Panel",
+      "id": 4,
+      "name": "ЛистаИнвентара",
+      "title": "Листа инвентара",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "Collection",
+          "id": 5,
+          "name": "СтавкаЛисте",
+          "template": {
+            "type": "Panel",
+            "id": 6,
+            "name": "СтавкаЛисте",
+            "title": "Ставка листе",
+            "layout": {
+              "type": "Grid",
+              "showGridLines": true
+            },
+            "controls": [
+              {
+                "type": "TextBox",
+                "id": 7,
+                "name": "Број",
+                "dataType": "Integer",
+                "label": "Број",
+                "isRequired": true,
+                "restrictedValue": {
+                  "rules": [
+                    {
+                      "targetName": "СтавкаЛисте.Број",
+                      "operator": ">",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "TextBox",
+                "id": 8,
+                "name": "Назив",
+                "dataType": "String",
+                "label": "Назив",
+                "isRequired": true
+              },
+              {
+                "type": "TextBox",
+                "id": 9,
+                "name": "Количина",
+                "dataType": "Integer",
+                "label": "Количина",
+                "isRequired": true,
+                "restrictedValue": {
+                  "rules": [
+                    {
+                      "targetName": "СтавкаЛисте.Количина",
+                      "operator": ">",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "TextBox",
+                "id": 10,
+                "name": "ЦенаПоКомаду",
+                "pattern": "{n} РСД",
+                "dataType": "Integer",
+                "label": "Цена по комаду",
+                "isRequired": true,
+                "restrictedValue": {
+                  "rules": [
+                    {
+                      "targetName": "СтавкаЛисте.ЦенаПоКомаду",
+                      "operator": ">",
+                      "value": 0
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "TextBox",
+                "id": 11,
+                "name": "УкупнаЦена",
+                "pattern": "{n} РСД",
+                "dataType": "Integer",
+                "label": "Укупна цена",
+                "isRequired": true,
+                "isReadOnly": true,
+                "computedValue": {
+                  "rules": [
+                    {
+                      "operator": "*",
+                      "value": [
+                        {
+                          "targetName": "СтавкаЛисте.Количина"
+                        },
+                        {
+                          "targetName": "СтавкаЛисте.ЦенаПоКомаду"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 12,
+          "name": "УкупнаВредност",
+          "pattern": "{n} РСД",
+          "dataType": "Integer",
+          "label": "Укупна вредност",
+          "isRequired": true,
+          "isReadOnly": true,
+          "computedValue": {
+            "rules": [
+              {
+                "operator": "SUM",
+                "value": [
+                  {
+                    "targetName": "СтавкаЛисте.УкупнаЦена"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "Panel",
+      "id": 13,
+      "name": "Испорука",
+      "title": "Испорука",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "CheckBox",
+          "id": 14,
+          "name": "Лично",
+          "groupName": "Испорука",
+          "optionValue": "Лично",
+          "dataType": "Logical",
+          "label": "Лично"
+        },
+        {
+          "type": "CheckBox",
+          "id": 15,
+          "name": "ПутемЕПоште",
+          "groupName": "Испорука",
+          "optionValue": "ПутемЕПоште",
+          "dataType": "Logical",
+          "label": "Путем е-поште"
+        },
+        {
+          "type": "CheckBox",
+          "id": 16,
+          "name": "ПутемПоште",
+          "groupName": "Испорука",
+          "optionValue": "ПутемПоште",
+          "dataType": "Logical",
+          "label": "Путем поште"
+        },
+        {
+          "type": "CheckBox",
+          "id": 17,
+          "name": "ПутемИнтерногСистема",
+          "groupName": "Испорука",
+          "optionValue": "ПутемИнтерногСистема",
+          "dataType": "Logical",
+          "label": "Путем интерног система"
+        }
+      ]
+    },
+    {
+      "type": "Panel",
+      "id": 18,
+      "name": "Припремио",
+      "title": "Припремио",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "TextBox",
+          "id": 19,
+          "name": "ИмеИПрезиме",
+          "pattern": "^([А-Ш][а-ш]+\\s*)+$",
+          "dataType": "String",
+          "label": "Име и презиме",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 20,
+          "name": "Телефон",
+          "pattern": "^(\\+3816)[0-9]{7,9}$",
+          "dataType": "String",
+          "label": "Телефон",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 21,
+          "name": "ЕПошта",
+          "dataType": "String",
+          "label": "Е пошта",
+          "isRequired": true,
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "ЕПошта",
+                "operator": "LIKE",
+                "value": "%@%.%"
+              }
+            ]
+          }
+        },
+        {
+          "type": "DateTimePicker",
+          "id": 22,
+          "name": "Датум",
+          "format": "dd.MM.yyyy.",
+          "dataType": "Date",
+          "label": "Датум",
+          "isRequired": true,
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "Датум",
+                "operator": "<=",
+                "value": "today"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

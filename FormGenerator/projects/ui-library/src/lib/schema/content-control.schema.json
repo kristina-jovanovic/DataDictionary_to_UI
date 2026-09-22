@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/content-control.schema.json",
+  "type": "object",
+  "required": ["value"],
+  "properties": {
+    "value": {}
+  },
+  "allOf": [
+    { "if": { "properties": { "type": { "const": "Label" } } },
+      "then": { "$ref": "controls/label.schema.json" } },
+    { "if": { "properties": { "type": { "const": "ProgressBar" } } },
+      "then": { "$ref": "controls/progress-bar.schema.json" } }
+  ]
+}

@@ -1,0 +1,13 @@
+<label class="ui-field">
+  <span class="ui-field_label" *ngIf="node.label">
+    {{ node.label }}<em *ngIf="node.isRequired"> *</em>
+  </span>
+  <select
+    *ngIf="fc as c"
+    class="ui-field_input"
+    [formControl]="c"
+    [multiple]="isMultiple">
+    <option *ngIf="!isMultiple" [value]="null">{{ node.placeholder || '—' }}</option>
+    <option *ngFor="let item of items" [value]="item.value">{{ item.label }}</option>
+  </select>
+</label>

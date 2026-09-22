@@ -1,0 +1,17 @@
+<label class="ui-field">
+  <span class="ui-field_label" *ngIf="node.label">
+    {{ node.label }}<em *ngIf="node.isRequired"> *</em>
+  </span>
+  <span class="ui-field_box" [class.has-prefix]="prefix" [class.has-suffix]="suffix">
+    <span class="ui-field_prefix" *ngIf="prefix">{{ prefix }}</span>
+    <input
+      *ngIf="fc as c"
+      class="ui-field_input"
+      [type]="inputType"
+      [formControl]="c"
+      [attr.min]="node.min"
+      [attr.max]="node.max"
+      [readOnly]="!!node.isReadOnly" />
+    <span class="ui-field_suffix" *ngIf="suffix">{{ suffix }}</span>
+  </span>
+</label>

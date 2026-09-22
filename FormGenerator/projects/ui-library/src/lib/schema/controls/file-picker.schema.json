@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/controls/file-picker.schema.json",
+  "type": "object",
+  "properties": {
+    "fileFormat": { "type": "string", "default": "image/*" }
+  }
+}

@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows;
 using Microsoft.Win32;
 using DataDictionary.Analysis;
@@ -11,6 +13,7 @@ namespace DataDictionary.WpfApp
 {
     public partial class MainWindow : Window
     {
+        private bool _launched;
         public MainWindow()
         {
             InitializeComponent();
@@ -60,11 +63,79 @@ namespace DataDictionary.WpfApp
                 var uiRoot = new UiModelBuilder().Build(result.Model!);
                 JsonOutput.Text = UiModelJsonWriter.ToJson(uiRoot);
                 ErrorsList.Items.Add("✓ Нема грешака — JSON успешно генерисан.");
+
+                // 5. prosledi generisani JSON FormGenerator-u i otvori web + mobilnu
+                OpenInFormGenerator(JsonOutput.Text);
             }
             catch (Exception ex)
             {
                 ErrorsList.Items.Add($"[Трансформација] {ex.Message}");
             }
+        }
+
+        // Upisi generisani JSON u FormGenerator i otvori web + mobilnu aplikaciju
+        private void OpenInFormGenerator(string json)
+        {
+            var formGen = FindFormGenerator();
+            if (formGen == null)
+            {
+                ErrorsList.Items.Add("[FormGenerator] Фолдер 'FormGenerator' није пронађен.");
+                return;
+            }
+
+            try
+            {
+                var target = Path.Combine(formGen, "projects", "demo", "src", "app", "generated.json");
+                File.WriteAllText(target, json, new UTF8Encoding(false));
+            }
+            catch (Exception ex)
+            {
+                ErrorsList.Items.Add($"[FormGenerator] Упис generated.json: {ex.Message}");
+                return;
+            }
+
+            if (_launched)
+            {
+                return;
+            }
+
+            try
+            {
+                // pokretanje web i mobilne aplikacije
+                StartInDir(formGen, "npx ng serve demo -c mobile --open");
+                _launched = true;
+                ErrorsList.Items.Add("▶ Покренут дев-сервер (ng serve demo -c mobile). "
+                    + "На телефону отвори http://<IP-рачунара>:4200");
+            }
+            catch (Exception ex)
+            {
+                ErrorsList.Items.Add($"[FormGenerator] Покретање: {ex.Message}");
+            }
+        }
+
+        // Pokreni komandu u zadatom folderu u okviru cmd prozora
+        private static void StartInDir(string workingDir, string command)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                Arguments = "/k " + command,
+                WorkingDirectory = workingDir,
+                UseShellExecute = true
+            });
+        }
+
+        // Pronadji folder FormGenerator
+        private static string? FindFormGenerator()
+        {
+            var dir = new DirectoryInfo(AppContext.BaseDirectory);
+            while (dir != null)
+            {
+                var candidate = Path.Combine(dir.FullName, "FormGenerator");
+                if (Directory.Exists(candidate)) return candidate;
+                dir = dir.Parent;
+            }
+            return null;
         }
 
         // Oznaka greske po tipu

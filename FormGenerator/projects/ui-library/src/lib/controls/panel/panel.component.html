@@ -1,0 +1,58 @@
+<fieldset
+  class="ui-panel"
+  [class.is-root]="isRoot"
+  [class.ui-panel--edit]="editMode.enabled"
+  (contextmenu)="onContextMenu($event)">
+  <div class="ui-panel_heading" *ngIf="isRoot && node.title">{{ node.title }}</div>
+  <legend class="ui-panel_title" *ngIf="!isRoot && node.title && !hideTitle">{{ node.title }}</legend>
+
+  <div
+    class="ui-panel_body"
+    [class.flow]="!isGrid"
+    [class.grid]="isGrid"
+    [class.lines]="showLines"
+    [class.is-main-stretch]="!isGrid && isMainStretch"
+    [ngStyle]="isGrid ? gridStyle : flowStyle">
+    <ng-container *ngFor="let item of renderItems; trackBy: trackItem">
+      <ui-renderer
+        *ngIf="item.kind === 'single'"
+        [node]="item.node"
+        [control]="controlFor(item.node)">
+      </ui-renderer>
+
+      <div class="ui-tabs" *ngIf="item.kind === 'tabs'">
+        <div class="ui-tabs_bar">
+          <button
+            type="button"
+            class="ui-tabs_tab"
+            *ngFor="let p of item.panels; let i = index"
+            [class.is-active]="activeIndex(item.group) === i"
+            (click)="selectTab(item.group, i)">
+            {{ p.title || p.name }}
+          </button>
+        </div>
+        <div class="ui-tabs_body">
+          <ui-panel
+            [node]="item.panels[activeIndex(item.group)]"
+            [control]="controlFor(item.panels[activeIndex(item.group)])"
+            [hideTitle]="true">
+          </ui-panel>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="menuOpen">
+    <div
+      class="ui-panel_backdrop"
+      (click)="closeMenu()"
+      (contextmenu)="$event.preventDefault(); closeMenu()"></div>
+    <div class="ui-panel_menu" [style.left.px]="menuX" [style.top.px]="menuY">
+      <div class="ui-panel_menu-head">
+        <span>Layout: {{ node.title || node.name }}</span>
+        <button type="button" (click)="closeMenu()">×</button>
+      </div>
+      <ui-layout-editor [node]="node"></ui-layout-editor>
+    </div>
+  </ng-container>
+</fieldset>

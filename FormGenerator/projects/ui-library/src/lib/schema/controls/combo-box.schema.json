@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/controls/combo-box.schema.json",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/comboItem" },
+      "default": []
+    },
+    "selectionMode": { "type": "string", "default": "Single" },
+    "isEditable": { "type": "boolean", "default": false },
+    "placeholder": { "type": "string" }
+  },
+  "$defs": {
+    "comboItem": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "integer" },
+        "value": { "type": "string" },
+        "label": { "type": "string" }
+      }
+    }
+  }
+}

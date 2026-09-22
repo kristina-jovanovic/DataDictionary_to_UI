@@ -1,0 +1,409 @@
+{
+  "type": "Panel",
+  "id": 1,
+  "name": "ИспитнаПријава",
+  "title": "Испитна пријава",
+  "layout": {
+    "type": "Flow"
+  },
+  "controls": [
+    {
+      "type": "Panel",
+      "id": 2,
+      "name": "ПодациОСтуденту",
+      "title": "Подаци о студенту",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "TextBox",
+          "id": 3,
+          "name": "ПрезимеИИме",
+          "pattern": "^([А-Ш][а-ш]+\\s*)+$",
+          "dataType": "String",
+          "label": "Презиме и име",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 4,
+          "name": "БројИндекса",
+          "pattern": "^[0-9]{4}$",
+          "dataType": "String",
+          "label": "Број индекса",
+          "isRequired": true
+        },
+        {
+          "type": "DateTimePicker",
+          "id": 5,
+          "name": "ГодинаУписа",
+          "format": "yyyy",
+          "dataType": "Date",
+          "label": "Година уписа",
+          "isRequired": true,
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "ГодинаУписа",
+                "operator": "<=",
+                "value": "today"
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 6,
+          "name": "ЈМБГ",
+          "pattern": "^[0-9]{13}$",
+          "dataType": "String",
+          "label": "ЈМБГ",
+          "isRequired": true
+        },
+        {
+          "type": "TextBox",
+          "id": 7,
+          "name": "ЕПошта",
+          "dataType": "String",
+          "label": "Е-пошта",
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "ЕПошта",
+                "operator": "LIKE",
+                "value": "%@%.%"
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 8,
+          "name": "Телефон",
+          "pattern": "^(\\+3816)[0-9]{7,9}$",
+          "dataType": "String",
+          "label": "Телефон",
+          "isRequired": true
+        },
+        {
+          "type": "Panel",
+          "id": 9,
+          "name": "СтатусСтудента",
+          "title": "Статус студента",
+          "layout": {
+            "type": "Flow"
+          },
+          "controls": [
+            {
+              "type": "RadioButton",
+              "id": 10,
+              "name": "Буџет",
+              "groupName": "СтатусСтудента",
+              "optionValue": "Буџет",
+              "dataType": "Logical",
+              "label": "Буџет"
+            },
+            {
+              "type": "RadioButton",
+              "id": 11,
+              "name": "Самофинансирање",
+              "groupName": "СтатусСтудента",
+              "optionValue": "Самофинансирање",
+              "dataType": "Logical",
+              "label": "Самофинансирање"
+            }
+          ]
+        },
+        {
+          "type": "Panel",
+          "id": 12,
+          "name": "ПосебанСтатусСтудента",
+          "title": "Посебан статус студента",
+          "layout": {
+            "type": "Flow"
+          },
+          "controls": [
+            {
+              "type": "CheckBox",
+              "id": 13,
+              "name": "Стипендиста",
+              "groupName": "ПосебанСтатусСтудента",
+              "optionValue": "Стипендиста",
+              "dataType": "Logical",
+              "label": "Стипендиста"
+            },
+            {
+              "type": "CheckBox",
+              "id": 14,
+              "name": "СтудентУРадномОдносу",
+              "groupName": "ПосебанСтатусСтудента",
+              "optionValue": "СтудентУРадномОдносу",
+              "dataType": "Logical",
+              "label": "Студент у радном односу"
+            },
+            {
+              "type": "CheckBox",
+              "id": 15,
+              "name": "ЧланСтудентскеОрганизације",
+              "groupName": "ПосебанСтатусСтудента",
+              "optionValue": "ЧланСтудентскеОрганизације",
+              "dataType": "Logical",
+              "label": "Члан студентске организације"
+            },
+            {
+              "type": "CheckBox",
+              "id": 16,
+              "name": "Такмичар",
+              "groupName": "ПосебанСтатусСтудента",
+              "optionValue": "Такмичар",
+              "dataType": "Logical",
+              "label": "Такмичар"
+            },
+            {
+              "type": "CheckBox",
+              "id": 17,
+              "name": "Нема",
+              "groupName": "ПосебанСтатусСтудента",
+              "optionValue": "Нема",
+              "dataType": "Logical",
+              "label": "Нема"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Panel",
+      "id": 18,
+      "name": "ПодациОИспиту",
+      "title": "Подаци о испиту",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "TextBox",
+          "id": 19,
+          "name": "НазивПредмета",
+          "pattern": "^[А-Ш][а-ш]+(\\s[а-ш]+)*$",
+          "dataType": "String",
+          "label": "Назив предмета",
+          "isRequired": true
+        },
+        {
+          "type": "Panel",
+          "id": 20,
+          "name": "ИспитниРок",
+          "title": "Испитни рок",
+          "layout": {
+            "type": "Flow"
+          },
+          "controls": [
+            {
+              "type": "RadioButton",
+              "id": 21,
+              "name": "Јануарски",
+              "groupName": "ИспитниРок",
+              "optionValue": "Јануарски",
+              "dataType": "Logical",
+              "label": "Јануарски"
+            },
+            {
+              "type": "RadioButton",
+              "id": 22,
+              "name": "Фебруарски",
+              "groupName": "ИспитниРок",
+              "optionValue": "Фебруарски",
+              "dataType": "Logical",
+              "label": "Фебруарски"
+            },
+            {
+              "type": "RadioButton",
+              "id": 23,
+              "name": "Јунски",
+              "groupName": "ИспитниРок",
+              "optionValue": "Јунски",
+              "dataType": "Logical",
+              "label": "Јунски"
+            },
+            {
+              "type": "RadioButton",
+              "id": 24,
+              "name": "Септембарски",
+              "groupName": "ИспитниРок",
+              "optionValue": "Септембарски",
+              "dataType": "Logical",
+              "label": "Септембарски"
+            },
+            {
+              "type": "RadioButton",
+              "id": 25,
+              "name": "Октобарски",
+              "groupName": "ИспитниРок",
+              "optionValue": "Октобарски",
+              "dataType": "Logical",
+              "label": "Октобарски"
+            }
+          ]
+        },
+        {
+          "type": "Panel",
+          "id": 26,
+          "name": "Прилози",
+          "title": "Прилози",
+          "layout": {
+            "type": "Flow"
+          },
+          "controls": [
+            {
+              "type": "CheckBox",
+              "id": 27,
+              "name": "Уплатница",
+              "groupName": "Прилози",
+              "optionValue": "Уплатница",
+              "dataType": "Logical",
+              "label": "Уплатница"
+            },
+            {
+              "type": "CheckBox",
+              "id": 28,
+              "name": "ПотврдаОПоенима",
+              "groupName": "Прилози",
+              "optionValue": "ПотврдаОПоенима",
+              "dataType": "Logical",
+              "label": "Потврда о поенима"
+            },
+            {
+              "type": "CheckBox",
+              "id": 29,
+              "name": "Пројекат",
+              "groupName": "Прилози",
+              "optionValue": "Пројекат",
+              "dataType": "Logical",
+              "label": "Пројекат"
+            },
+            {
+              "type": "CheckBox",
+              "id": 30,
+              "name": "Молба",
+              "groupName": "Прилози",
+              "optionValue": "Молба",
+              "dataType": "Logical",
+              "label": "Молба"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Panel",
+      "id": 31,
+      "name": "ПодациООцени",
+      "title": "Подаци о оцени",
+      "layout": {
+        "type": "Flow"
+      },
+      "controls": [
+        {
+          "type": "TextBox",
+          "id": 32,
+          "name": "ПредиспитниПоени",
+          "dataType": "Real",
+          "label": "Предиспитни поени",
+          "isRequired": true,
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "ПредиспитниПоени",
+                "operator": ">=",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 33,
+          "name": "ПоениНаИспиту",
+          "dataType": "Real",
+          "label": "Поени на испиту",
+          "isRequired": true,
+          "restrictedValue": {
+            "rules": [
+              {
+                "targetName": "ПоениНаИспиту",
+                "operator": ">=",
+                "value": 0
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 34,
+          "name": "УкупниПоени",
+          "dataType": "Real",
+          "label": "Укупни поени",
+          "isRequired": true,
+          "isReadOnly": true,
+          "computedValue": {
+            "rules": [
+              {
+                "operator": "+",
+                "value": [
+                  {
+                    "targetName": "ПредиспитниПоени"
+                  },
+                  {
+                    "targetName": "ПоениНаИспиту"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "TextBox",
+          "id": 35,
+          "name": "Оцена",
+          "dataType": "Integer",
+          "label": "Оцена",
+          "isRequired": true,
+          "restrictedValue": {
+            "group": "AND",
+            "rules": [
+              {
+                "targetName": "Оцена",
+                "operator": ">=",
+                "value": 5
+              },
+              {
+                "targetName": "Оцена",
+                "operator": "<=",
+                "value": 10
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "type": "DateTimePicker",
+      "id": 36,
+      "name": "ДатумПолагања",
+      "format": "dd.MM.yyyy.",
+      "dataType": "Date",
+      "label": "Датум полагања",
+      "isRequired": true
+    },
+    {
+      "type": "FilePicker",
+      "id": 37,
+      "name": "ПотписНаставника",
+      "dataType": "Graphic",
+      "label": "Потпис наставника",
+      "isRequired": true
+    }
+  ]
+}

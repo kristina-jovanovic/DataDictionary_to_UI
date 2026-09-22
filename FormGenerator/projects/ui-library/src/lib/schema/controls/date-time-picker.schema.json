@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/controls/date-time-picker.schema.json",
+  "type": "object",
+  "properties": {
+    "mode": { "type": "string", "default": "Date" },
+    "format": { "type": "string" },
+    "min": { "type": ["string", "number"] },
+    "max": { "type": ["string", "number"] }
+  }
+}

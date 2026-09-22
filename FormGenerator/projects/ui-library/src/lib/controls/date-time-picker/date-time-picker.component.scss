@@ -1,0 +1,51 @@
+.ui-field {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+
+  &_label em {
+    color: #c0392b;
+    font-style: normal;
+  }
+
+  &_input {
+    padding: .35rem .5rem;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+  }
+}
+
+.ui-datepick {
+  display: flex;
+  align-items: center;
+  gap: .3rem;
+  position: relative;
+
+  .ui-field_input {
+    flex: 1;
+    cursor: pointer;
+  }
+}
+
+.ui-datepick_native {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ui-datepick_btn {
+  border: 1px solid #bbb;
+  background: #f7f7f7;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: .25rem .45rem;
+  line-height: 1;
+}
+
+.ui-field_input.ng-touched.ng-invalid {
+  border-color: #c0392b;
+}

@@ -1,0 +1,102 @@
+.ui-collection {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  &_table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: .3rem .5rem;
+      text-align: left;
+      vertical-align: middle;
+    }
+    th {
+      background: #f3f3f3;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    td ::ng-deep .ui-field_label { display: none; }
+    td ::ng-deep .ui-field { gap: 0; }
+    td ::ng-deep .ui-field_input { width: 100%; box-sizing: border-box; }
+  }
+
+  @media (max-width: 640px) {
+    &_table {
+      display: block;
+
+      thead { display: none; }
+      tbody { display: block; }
+
+      tr {
+        display: block;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        margin-bottom: .6rem;
+        padding: .15rem .6rem;
+      }
+
+      td {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        border: none;
+        border-bottom: 1px solid #eee;
+        padding: .45rem 0;
+
+        &::before {
+          content: attr(data-label);
+          flex: 0 0 42%;
+          font-weight: 600;
+          font-size: 13px;
+          color: #555;
+        }
+      }
+
+      .ui-collection_actions {
+        justify-content: flex-start;
+        border-bottom: none;
+        &::before { content: none; }
+      }
+    }
+  }
+
+  &_actions, &_actions-h {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  &_item {
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+  }
+
+  &_del {
+    border: 1px solid #d99;
+    background: #fff0f0;
+    color: #c0392b;
+    border-radius: 4px;
+    width: 1.6rem;
+    height: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  &_empty {
+    color: #888;
+    font-style: italic;
+  }
+
+  &_add {
+    align-self: flex-start;
+    padding: .3rem .6rem;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    background: #f7f7f7;
+    cursor: pointer;
+  }
+}

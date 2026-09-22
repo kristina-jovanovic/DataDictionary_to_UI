@@ -1,0 +1,59 @@
+<div class="ui-led">
+  <label class="ui-led_row">
+    <span>Tab group</span>
+    <input type="text" [(ngModel)]="tabGroupName" placeholder="(none)" />
+  </label>
+
+  <label class="ui-led_row">
+    <span>Type</span>
+    <select [(ngModel)]="type">
+      <option value="Flow">Flow</option>
+      <option value="Grid">Grid</option>
+    </select>
+  </label>
+
+  <ng-container *ngIf="layout.type === 'Flow'">
+    <label class="ui-led_row">
+      <span>Orientation</span>
+      <select [(ngModel)]="orientation">
+        <option value="vertical">vertical</option>
+        <option value="horizontal">horizontal</option>
+      </select>
+    </label>
+    <label class="ui-led_row">
+      <span>Wrap</span>
+      <input type="checkbox" [(ngModel)]="isWrapped" />
+    </label>
+    <label class="ui-led_row">
+      <span>Main align</span>
+      <select [(ngModel)]="mainAlign">
+        <option *ngFor="let a of alignments" [value]="a">{{ a }}</option>
+      </select>
+    </label>
+    <label class="ui-led_row">
+      <span>Cross align</span>
+      <select [(ngModel)]="crossAlign">
+        <option *ngFor="let a of alignments" [value]="a">{{ a }}</option>
+      </select>
+    </label>
+    <label class="ui-led_row">
+      <span>Gap (px)</span>
+      <input type="number" min="0" [(ngModel)]="gap" />
+    </label>
+  </ng-container>
+
+  <ng-container *ngIf="layout.type === 'Grid'">
+    <label class="ui-led_row">
+      <span>Columns</span>
+      <input type="number" min="1" [ngModel]="columnCount" (ngModelChange)="setColumnCount($event)" />
+    </label>
+    <label class="ui-led_row">
+      <span>Rows</span>
+      <input type="number" min="0" [ngModel]="rowCount" (ngModelChange)="setRowCount($event)" />
+    </label>
+    <label class="ui-led_row">
+      <span>Grid lines</span>
+      <input type="checkbox" [(ngModel)]="showLines" />
+    </label>
+  </ng-container>
+</div>

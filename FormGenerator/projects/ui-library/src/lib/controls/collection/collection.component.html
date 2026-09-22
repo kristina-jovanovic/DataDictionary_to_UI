@@ -1,0 +1,36 @@
+<div class="ui-collection">
+  <ng-container *ngIf="isTable; else stacked">
+    <table class="ui-collection_table">
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">{{ col.label || col.name }}</th>
+          <th class="ui-collection_actions-h"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of rows; let i = index">
+          <td *ngFor="let col of columns" [attr.data-label]="col.label || col.name">
+            <ui-renderer [node]="col" [control]="cellControl(row, col)"></ui-renderer>
+          </td>
+          <td class="ui-collection_actions">
+            <button type="button" class="ui-collection_del" (click)="removeRow(i)" title="Обриши">×</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-template #stacked>
+    <ng-container *ngIf="template as tpl; else empty">
+      <div class="ui-collection_item" *ngFor="let item of items; let i = index">
+        <ui-renderer [node]="tpl" [control]="item"></ui-renderer>
+        <button type="button" class="ui-collection_del" (click)="removeRow(i)" title="Обриши">×</button>
+      </div>
+    </ng-container>
+    <ng-template #empty>
+      <div class="ui-collection_empty">Скуп без template-а</div>
+    </ng-template>
+  </ng-template>
+
+  <button type="button" class="ui-collection_add" (click)="addRow()">+ Додај</button>
+</div>

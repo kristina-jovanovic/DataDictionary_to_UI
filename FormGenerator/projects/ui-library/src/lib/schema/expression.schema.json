@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/expression.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "group": { "enum": ["AND", "OR", "XOR"] },
+    "rules": { "type": "array", "items": { "$ref": "#" } },
+    "operator": {
+      "enum": [
+        ">", "<", ">=", "<=", "=", "!=",
+        "+", "-", "*", "/",
+        "AND", "OR", "NOT",
+        "SUM", "MIN", "MAX", "AVG", "COUNT",
+        "IN", "NOT_IN", "LIKE"
+      ]
+    },
+    "targetName": { "type": "string" },
+    "value": {
+      "oneOf": [
+        { "type": ["string", "number", "boolean", "null"] },
+        { "type": "array", "items": { "$ref": "#" } }
+      ]
+    }
+  }
+}

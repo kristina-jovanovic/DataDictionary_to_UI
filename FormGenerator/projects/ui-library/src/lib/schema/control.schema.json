@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ui.local/schema/control.schema.json",
+  "title": "Metamodel control tree",
+  "type": "object",
+  "required": ["id", "name", "type"],
+  "properties": {
+    "id": { "type": "integer" },
+    "name": { "type": "string" },
+    "type": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "type": { "const": "Panel" } },
+        "required": ["type"]
+      },
+      "then": { "$ref": "controls/panel.schema.json" }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "Collection" } },
+        "required": ["type"]
+      },
+      "then": {
+        "$ref": "controls/collection.schema.json"
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "TextBox","DateTimePicker",
+              "RadioButton","CheckBox",
+              "ComboBox","FilePicker",
+              "Slider"
+            ]
+          }
+        },
+        "required": ["type"]
+      },
+      "then": { "$ref": "data-control.schema.json" }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "Label",
+              "ProgressBar"
+            ]
+          }
+        },
+        "required": ["type"]
+      },
+      "then": { "$ref": "content-control.schema.json"}
+    }
+  ]
+}
